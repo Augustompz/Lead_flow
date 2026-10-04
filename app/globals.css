@@ -1,0 +1,431 @@
+@import "tailwindcss";
+
+/*
+  Visual do LeadFlow: um caderno de trabalho calmo.
+  Neutros com leve tom verde-acinzentado, um único azul-petróleo como acento,
+  cores de status suaves (nada de vermelho gritante) e muito espaço.
+*/
+:root {
+  color-scheme: light;
+  --bg: #f4f6f5;
+  --surface: #ffffff;
+  --surface-2: #edf1f0;
+  --line: #e2e8e6;
+  --line-strong: #cbd5d2;
+  --text: #1c2a29;
+  --text-2: #3f5250;
+  --muted: #5a6b69;
+
+  --accent: #2b6f8e;
+  --accent-strong: #225a74;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2eef3;
+
+  --good: #1f6a49;
+  --good-soft: #e1f0e8;
+  --warn: #8a5d0c;
+  --warn-soft: #f8eed6;
+  --rose: #8f4a46;
+  --rose-soft: #f5e7e5;
+
+  --whats: #1f7a4c;
+  --whats-ink: #ffffff;
+
+  --shadow: 0 1px 2px rgba(22, 44, 41, 0.05), 0 4px 14px rgba(22, 44, 41, 0.04);
+
+  /* gráficos (paleta categórica validada) */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --grid: #e2e8e6;
+  --axis: #cbd5d2;
+  --funnel-1: #a9cde2;
+  --funnel-2: #7fb3d0;
+  --funnel-3: #4f93b8;
+  --funnel-4: #2b6f8e;
+  --funnel-5: #1d5470;
+
+  --font-body: var(--font-figtree), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-display: var(--font-bricolage), var(--font-figtree), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+
+/* Escuro suave: cinza-esverdeado de baixo contraste, sem preto e sem branco puro. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #1b2221;
+    --surface: #232c2b;
+    --surface-2: #2b3534;
+    --line: #35403e;
+    --line-strong: #475451;
+    --text: #e1e8e6;
+    --text-2: #bcc8c5;
+    --muted: #98a8a5;
+
+    --accent: #79b9d5;
+    --accent-strong: #95c9e0;
+    --accent-ink: #11232b;
+    --accent-soft: #27414b;
+
+    --good: #7dcba4;
+    --good-soft: #25403a;
+    --warn: #e4be72;
+    --warn-soft: #3b3321;
+    --rose: #e1a8a3;
+    --rose-soft: #3e2c2b;
+
+    --whats: #55b98a;
+    --whats-ink: #0b1e14;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --grid: #35403e;
+    --axis: #475451;
+    --funnel-1: #2a5568;
+    --funnel-2: #37718a;
+    --funnel-3: #4b8fac;
+    --funnel-4: #6eb0cb;
+    --funnel-5: #a3d0e3;
+  }
+}
+
+/* Mesmo escuro, escolhido à mão no botão de aparência */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1b2221;
+  --surface: #232c2b;
+  --surface-2: #2b3534;
+  --line: #35403e;
+  --line-strong: #475451;
+  --text: #e1e8e6;
+  --text-2: #bcc8c5;
+  --muted: #98a8a5;
+
+  --accent: #79b9d5;
+  --accent-strong: #95c9e0;
+  --accent-ink: #11232b;
+  --accent-soft: #27414b;
+
+  --good: #7dcba4;
+  --good-soft: #25403a;
+  --warn: #e4be72;
+  --warn-soft: #3b3321;
+  --rose: #e1a8a3;
+  --rose-soft: #3e2c2b;
+
+  --whats: #55b98a;
+  --whats-ink: #0b1e14;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --grid: #35403e;
+  --axis: #475451;
+  --funnel-1: #2a5568;
+  --funnel-2: #37718a;
+  --funnel-3: #4b8fac;
+  --funnel-4: #6eb0cb;
+  --funnel-5: #a3d0e3;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-rose: var(--rose);
+  --color-rose-soft: var(--rose-soft);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@layer components {
+  /* ---------- superfícies ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card-soft {
+    background: var(--surface-2);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .panel-accent {
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    border-radius: 18px;
+    padding: 20px;
+  }
+
+  /* ---------- formulários ---------- */
+  .label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-2);
+    margin-bottom: 6px;
+  }
+  .help {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .input {
+    width: 100%;
+    min-height: 46px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    padding: 9px 14px;
+    font-size: 16px;
+  }
+  .input::placeholder {
+    color: color-mix(in srgb, var(--muted) 75%, transparent);
+  }
+  textarea.input {
+    line-height: 1.5;
+  }
+  .input:focus-visible,
+  .btn:focus-visible,
+  a:focus-visible,
+  summary:focus-visible,
+  select:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- botões ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    max-width: 100%;
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s, border-color 0.15s;
+  }
+  .btn:hover:not(:disabled) {
+    background: var(--surface-2);
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+  .btn-whats {
+    background: var(--whats);
+    border-color: var(--whats);
+    color: var(--whats-ink);
+  }
+  .btn-whats:hover:not(:disabled) {
+    background: var(--whats);
+    filter: brightness(1.07);
+  }
+  .btn-ghost {
+    border-color: transparent;
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn-sm {
+    min-height: 38px;
+    padding: 5px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+  .btn-danger {
+    color: var(--rose);
+  }
+  .btn-block {
+    width: 100%;
+  }
+
+  /* ---------- etiquetas ---------- */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 11px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1.5;
+  }
+
+  /* ---------- tabelas ---------- */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  .table th {
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .table td {
+    padding: 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+  .table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- abas e seletores ---------- */
+  .seg {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--surface-2);
+    border-radius: 14px;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .seg::-webkit-scrollbar {
+    display: none;
+  }
+  .seg > a,
+  .seg > button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-decoration: none;
+    white-space: nowrap;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  /* Abas que dividem a largura por igual (ex.: período no painel) */
+  .seg-fill {
+    display: flex;
+    width: 100%;
+  }
+  .seg-fill > a,
+  .seg-fill > button {
+    flex: 1 1 0;
+    justify-content: center;
+    padding: 0 8px;
+  }
+  .seg > a[aria-current="true"],
+  .seg > a[aria-current="page"],
+  .seg > button[aria-pressed="true"] {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 1px 2px rgba(22, 44, 41, 0.1);
+  }
+
+  /* ---------- seções recolhíveis ---------- */
+  details.fold > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 600;
+  }
+  details.fold > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.fold > summary .chev {
+    transition: transform 0.15s;
+    color: var(--muted);
+  }
+  details.fold[open] > summary .chev {
+    transform: rotate(180deg);
+  }
+}
+
+/* Telas de toque: alvos maiores */
+@media (pointer: coarse) {
+  .btn-sm {
+    min-height: 42px;
+  }
+  .seg > a,
+  .seg > button {
+    min-height: 42px;
+  }
+}
